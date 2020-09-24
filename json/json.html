@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>json.html</title>
+</head>
+
+<body>
+    <p id="showResult"></p>
+    <button onclick="showRowCnt()">보여줘.</button><br>
+    <label for="id">아이디</label>
+    <input type="text" name="id"><br>
+    <label for="first_name">성</label>
+    <input type="text" name="first_name"><br>
+    <label for="last_name">이름</label>
+    <input type="text" name="last_name"><br>
+    <label for="email">이메일</label>
+    <input type="text" name="email"><br>
+    <button onclick="updateField()">메롱</button>
+    <script>
+        let data = [{
+                "id": 1,
+                "first_name": "Tripp",
+                "last_name": "Janik",
+                "email": "tjanik0@sitemeter.com",
+                "gender": "Male",
+                "ip_address": "67.209.32.179"
+            },
+            {
+                "id": 2,
+                "first_name": "Tabatha",
+                "last_name": "Clarae",
+                "email": "tclarae1@china.com.cn",
+                "gender": "Female",
+                "ip_address": "153.227.65.22"
+            },
+            {
+                "id": 3,
+                "first_name": "Tabina",
+                "last_name": "Lavington",
+                "email": "tlavington2@ning.com",
+                "gender": "Female",
+                "ip_address": "163.38.67.20"
+            },
+            {
+                "id": 4,
+                "first_name": "Waly",
+                "last_name": "Tomek",
+                "email": "wtomek3@slate.com",
+                "gender": "Female",
+                "ip_address": "202.136.204.126"
+            },
+            {
+                "id": 5,
+                "first_name": "Madelena",
+                "last_name": "Iliffe",
+                "email": "miliffe4@t-online.de",
+                "gender": "Female",
+                "ip_address": "115.36.140.67"
+            },
+            {
+                "id": 6,
+                "first_name": "Gabriel",
+                "last_name": "Roiz",
+                "email": "groiz5@yandex.ru",
+                "gender": "Female",
+                "ip_address": "124.100.139.2"
+            },
+            {
+                "id": 7,
+                "first_name": "Doug",
+                "last_name": "Binley",
+                "email": "dbinley6@meetup.com",
+                "gender": "Male",
+                "ip_address": "131.160.240.70"
+            },
+            {
+                "id": 8,
+                "first_name": "Mortie",
+                "last_name": "Henstone",
+                "email": "mhenstone7@cpanel.net",
+                "gender": "Male",
+                "ip_address": "8.202.222.174"
+            },
+            {
+                "id": 9,
+                "first_name": "Link",
+                "last_name": "Yeandel",
+                "email": "lyeandel8@usda.gov",
+                "gender": "Male",
+                "ip_address": "226.24.194.234"
+            },
+            {
+                "id": 10,
+                "first_name": "Yance",
+                "last_name": "Boothe",
+                "email": "yboothe9@deliciousdays.com",
+                "gender": "Male",
+                "ip_address": "21.82.33.132"
+            },
+            {
+                "id": 11,
+                "first_name": "Genny",
+                "last_name": "Runcie",
+                "email": "grunciea@infoseek.co.jp",
+                "gender": "Female",
+                "ip_address": "244.82.115.215"
+            },
+            {
+                "id": 12,
+                "first_name": "Ban",
+                "last_name": "Gavrielly",
+                "email": "bgavriellyb@cbc.ca",
+                "gender": "Male",
+                "ip_address": "134.15.49.244"
+            },
+            {
+                "id": 13,
+                "first_name": "Hetty",
+                "last_name": "McDonand",
+                "email": "hmcdonandc@yellowbook.com",
+                "gender": "Female",
+                "ip_address": "124.71.32.228"
+            },
+            {
+                "id": 14,
+                "first_name": "Frank",
+                "last_name": "McIlhatton",
+                "email": "fmcilhattond@weather.com",
+                "gender": "Male",
+                "ip_address": "62.222.133.49"
+            },
+            {
+                "id": 15,
+                "first_name": "Reilly",
+                "last_name": "Beardwell",
+                "email": "rbeardwelle@yahoo.co.jp",
+                "gender": "Male",
+                "ip_address": "121.200.155.24"
+            },
+            {
+                "id": 16,
+                "first_name": "Laney",
+                "last_name": "Dankersley",
+                "email": "ldankersleyf@istockphoto.com",
+                "gender": "Female",
+                "ip_address": "84.80.175.235"
+            },
+            {
+                "id": 17,
+                "first_name": "Feodora",
+                "last_name": "Fuster",
+                "email": "ffusterg@sina.com.cn",
+                "gender": "Female",
+                "ip_address": "90.178.225.146"
+            },
+            {
+                "id": 18,
+                "first_name": "Aeriell",
+                "last_name": "Wordington",
+                "email": "awordingtonh@ucoz.ru",
+                "gender": "Female",
+                "ip_address": "41.186.47.15"
+            },
+            {
+                "id": 19,
+                "first_name": "Tedda",
+                "last_name": "Nutbean",
+                "email": "tnutbeani@smh.com.au",
+                "gender": "Female",
+                "ip_address": "166.250.117.38"
+            },
+            {
+                "id": 20,
+                "first_name": "Constantina",
+                "last_name": "Vittel",
+                "email": "cvittelj@ameblo.jp",
+                "gender": "Female",
+                "ip_address": "220.57.172.66"
+            }
+        ];
+
+        // for(let field in data[19]){
+        //     console.log(field, data[19][field]);
+        // }
+        // for(let datum of data){
+        //     console.log(datum);
+        // }
+        for (let i = 0; i < 10; i++)
+            data.pop();
+
+        let fields = ["id", "first_name", "last_name", "email", "button"];
+        let table, tr, td, text;
+        table = document.createElement("table");
+        table.setAttribute('border', '1');
+
+        //필드
+        tr = document.createElement("tr");
+        table.appendChild(tr);
+        for (let title of fields) {
+            td = document.createElement("th");
+            text = document.createTextNode(title.replace("_", "").toUpperCase());
+            td.appendChild(text);
+            tr.appendChild(td);
+
+        }
+
+        data.forEach(function (obj, idx, ary) {
+            tr = document.createElement("tr"); //tr 생성
+            tr.addEventListener("mouseover", function () {
+                this.style.background = "yellow";
+            })
+            tr.addEventListener("mouseout", function () {
+                this.style.background = "";
+            })
+            tr.addEventListener("click", function () {
+
+                localStorage.setItem("rowNum", idx); //rowNum이라는 변수에? idx값을 담을수있다.
+                localStorage.setItem("first_name", this.childNodes[1].firstChild.nodeValue);
+                localStorage.setItem("email", this.childNodes[3].firstChild.nodeValue);
+                // console.log(this.childNodes[]);\
+                //---------------------------------------
+                let changes = document.querySelectorAll("input");
+                for (let i = 0; i < changes.length; i++) {
+                    changes[i].value = this.childNodes[i].firstChild.nodeValue;
+                }
+            })
+
+            for (let field of fields) {
+                // console.log(`${idx} => 필드: ${field}, 값: ${obj[field]}`);
+                if (field == "button") {
+                    td = document.createElement("td");
+                    let btn = document.createElement("button");
+                    btn.innerHTML = "수정";
+                    td.appendChild(btn);
+                    tr.appendChild(td);
+                    btn.onclick = function(){
+                        let id = this.parentNode.parentNode.childNodes[0].firstChild.nodeValue;
+                        let fName = this.parentNode.parentNode.childNodes[1].firstChild.nodeValue;
+                        let lName = this.parentNode.parentNode.childNodes[2].firstChild.nodeValue;
+                        let email = this.parentNode.parentNode.childNodes[3].firstChild.nodeValue;
+
+                        window.location.href=//
+                        "jsonDetail.jsp?id=" + id + "&first_name=" + fName +
+                        "&last_name=" + lName + "&email=" + email ;
+                    }
+                } else {
+                    td = document.createElement("td"); //td생성
+                    text = document.createTextNode(obj[field]);
+                    td.appendChild(text);
+                    tr.appendChild(td);
+                }
+            }
+            table.appendChild(tr);
+            //    console.log(obj["first_name"]);
+        });
+        document.getElementById("showResult").appendChild(table);
+
+        function showRowCnt() {
+            console.log(localStorage.getItem("email"));
+        }
+
+        function updateField() {
+            let changeValue = document.querySelectorAll("input");
+
+
+            let changeTr = document.querySelectorAll("tr");
+            for (let i = 1; i < changeTr.length; i++) {
+                console.log(changeTr[i].childNodes[0].childNodes[0].nodeValue);
+                console.log(changeValue[0].value);
+                if (changeTr[i].childNodes[0].childNodes[0].nodeValue == changeValue[0].value) {
+                    for (var j = 1; j < changeValue.length; j++) {
+                        changeTr[i].childNodes[j].childNodes[0].nodeValue = changeValue[j].value;
+                    }
+                }
+
+            }
+
+        }
+    </script>
+    <!-- <script src="http://192.168.0.92/jScript/hobby/moon.js"></script>  -->
+</body>
+
+</html>

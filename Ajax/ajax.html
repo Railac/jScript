@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ajax.html</title>
+    <script>
+        function loadPage() {
+            console.log("loadPage()");
+            let xhtp = new XMLHttpRequest(); ///서버랑 주고받고하면서 상태가바뀜
+            xhtp.onreadystatechange = function () { //상태바뀌는작업들을하는게 onreadystatechange
+                console.log(xhtp.readyState, xhtp.status);
+                if(xhtp.readyState == 4 && xhtp.status == 200){
+                    let data= xhtp.responseText; 
+                    let obj = JSON.parse(data);//문자열 타입의 제이슨을 오브젝트타입으로바꿔주세요?
+                    createPage(obj);
+                }
+            }
+            xhtp.open("get", "mock.json"); //get ? data.txt를
+            xhtp.send(); //서버로 요청
+        }
+
+        function createPage(data){
+            let table, tr, td ,text;
+            table = document.createElement("table");
+            table.setAttribute('border','1');
+            
+            data.forEach(function(obj, idx){
+                tr =document.createElement("tr");
+                for(field in obj){
+                    td=document.createElement("td");
+                    text=document.createTextNode(obj[field]);
+                    td.appendChild(text);
+                    tr.appendChild(td);
+
+                }
+                table.appendChild(tr);
+            });
+
+            document.getElementById("show").appendChild(table);
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Ajax Sample</h1>
+    <p id="show"></p>
+    <button onclick="loadPage()">클릭</button>
+</body>
+
+</html>
