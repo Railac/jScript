@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ajaxXml.html</title>
+    <script>
+        function loadXml(){
+            let xhtp = new XMLHttpRequest();
+            xhtp.onreadystatechange =function(){
+                if(xhtp.readyState == 4 && xhtp.status == 200){ //이걸로최종적으로 뭔가가 처리됐단느걸 알수있음
+                    // console.log(xhtp.responseXML);
+                    createPage(xhtp.responseXML); //createPage 함수 호출
+                }
+            }
+            xhtp.open('get', 'cd_catalog.xml', true);//true면 비동기?동기?
+            xhtp.send();
+        }
+        function createPage(data){
+            let titles=['노래제목','가수','나라','레코드사','가격','출시년도'];
+            // console.log(data);
+            let tbl =document.getElementById("tbl");
+            let cds = data.getElementsByTagName("CD");
+            let tr, td, text;
+            tr = document.createElement("tr");
+            for(let title of titles){
+                td = document.createElement("th");
+                td.append(title);
+                tr.append(td);
+            }
+            tbl.appendChild(tr);
+            tbl.setAttribute('border','5');
+
+            for(let i=0; i<cds.length; i++){
+                tr = document.createElement("tr");
+                for(let j=0; j<titles.length;j++){
+                    td = document.createElement("td");
+                    text = document.createTextNode(cds[i].children[j].innerHTML);
+                    td.append(text);
+                    tr.append(td);
+                }
+                tbl.appendChild(tr);
+            }
+            
+            console.log(cds[0].children[1].innerHTML);
+
+        }
+    </script>
+</head>
+<body>
+    <h2>XML 요청</h2>
+    <button onclick="loadXml()">클릭</button>
+    <table id ="tbl" border="1"></table>
+
+</body>
+</html>

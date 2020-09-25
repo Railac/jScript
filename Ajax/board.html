@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>board.html</title>
+    <script src="board.js"></script>
+    <style>
+        .content {
+            border: 1px dotted red;
+            width: 350px;
+        }
+
+        .row {
+            display: block;
+            height: 30px;
+            padding: auto;
+        }
+
+        .label {
+            background-color: aqua;
+            display: inline-block;
+            width: 90px;
+        }
+
+        .values {
+            background-color: aqua;
+            display: inline-block;
+            width: 190px;
+        }
+        .button{
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body onload="getBoardList()">
+    <h2>입력화면</h2>
+    <div class="content">
+        <div class="row">
+            <div class="label">게시글 번호</div>
+            <div class="values">
+                <input type="text" name="boardNo" id="boardNo" value="10">
+            </div>
+        </div>
+
+        <div class="row">
+        <div class="label">제목</div>
+        <div class="values">
+            <input type="text" name="title" id="title" value="니얼굴">
+        </div>
+    </div>
+
+    <div class="row">
+    <div class="label">내용</div>
+    <div class="values">
+        <input type="text" name="content" id="content" value="못생김">
+    </div>
+    </div>
+
+    <div class="row">
+    <div class="label">작성자</div>
+    <div class="values">
+        <input type="text" name="writer" id="writer" value="그건바로너">
+    </div>
+    </div>
+
+    <div class="row">
+        <div class="button"><input type="button" onclick="insertData()" value="입력"></div>
+        <div class="button"><input type="button" value="삭제"></div>
+    </div>
+
+    
+    </div>
+    <h2>HTML 게시판</h2>
+    <p id="main"></p>
+</body>
+
+</html>

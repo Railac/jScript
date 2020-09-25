@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ajax2.html</title>
+    <script>
+        let xhtp = new XMLHttpRequest();
+        let xmlData;
+        xhtp.onreadystatechange = function () {
+            let table, tr, td, text;
+            table = "<table border='1'>";
+            if (this.readyState == 4 && this.status == 200) {
+                let data = this.responseXML; //open요청해서 받은 파일 data변수에 담음
+                xmlData = this.responseXML;
+                let cds = data.getElementsByTagName("CD");
+                for (let i = 0; i < cds.length; i++) {
+                    table += "<tr id="+i+" onclick='showCD("+i+")'>";
+                    table += "<td>" +cds[i].children[0].innerHTML +"</td>";
+                    table += "<td>" +cds[i].children[1].innerHTML +"</td></tr>";
+                }
+                table+="</table>";
+                document.getElementById("main").innerHTML = table;
+
+            }
+        }
+        xhtp.open('get', 'cd_catalog.xml');
+        xhtp.send();
+
+        function showCD(i){
+            let cds = xmlData.getElementsByTagName("CD");
+            let myP = "Title: " + cds[i].children[0].innerHTML;
+            myP += "<br>Artist: " + cds[i].children[1].innerHTML;
+            
+            document.getElementById("show").innerHTML =myP;
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Origin Sample</h1>
+    <p id = "show" ></p>
+    <div id="main"></div>
+</body>
+
+</html>

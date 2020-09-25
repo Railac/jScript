@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ajaxXml2.html</title>
+    <script>
+        let cnt = 0;
+        let lnth = 0;
+
+        function prev(){
+            cnt--;
+            if(cnt >=0){
+                showCD(cnt);
+            }else{
+                cnt =0;
+            }
+        }
+        function next(){
+             
+             console.log(lnth);
+             if(cnt-1 <lnth ){
+                showCD(cnt); //26이타면안됌
+                cnt++;
+                
+             }
+                
+             console.log(cnt);
+            
+        }
+        function showCD(i){
+            let myDiv = document.getElementById('show');
+            let xhtp = new XMLHttpRequest();
+            let myTag = '';
+
+            xhtp.onreadystatechange = function(){
+                if(xhtp.readyState==4 && xhtp.status == 200){
+                    let data = xhtp.responseXML;
+                    let cds = data.getElementsByTagName('CD');
+                    lnth = cds.length;///0 ~25
+                    myTag += 'Title: ' +cds[i].children[0].innerHTML;
+                    myTag += '<br>Artist: ' +cds[i].children[1].innerHTML;
+                    myTag += '<br>Country: ' +cds[i].children[2].innerHTML;
+
+                    myDiv.innerHTML= myTag;
+                    
+                }
+
+            }
+            xhtp.open('get','cd_catalog.xml');
+            xhtp.send();
+        }
+    </script>
+</head>
+<body>
+    
+    <button onclick="showCD(4)">show</button>
+    <div id ="show"></div>
+    <button onclick="prev()"><<</button>
+    <button onclick="next()">>></button>
+</body>
+</html>

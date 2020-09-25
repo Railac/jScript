@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>json2.html</title>
+    <script>
+        let student = {
+            name: "Hong",
+            age: 10,
+            grade: null,
+            marriage: false,
+            birth: new Date(),
+            info: function () {
+                console.log("my name is hong");
+            }
+        }
+        // console.log(student);
+
+        let json = JSON.stringify(student);
+        // let json = JSON.stringify(student, ['name','age','marriage']);
+        // let json = JSON.stringify(student, function (k, v) {
+        //     console.log(k, v);
+            
+        // });
+        // let reStu = JSON.parse(json);
+        let reStu = JSON.parse(json, function(k, v){
+            console.log(k, v);
+            return ((k =='birth') ? new Date(v) : v);
+            // return v;
+        });
+        console.log(reStu);
+        // console.log(json);
+        // console.log(reStu.birth.toDate());
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
